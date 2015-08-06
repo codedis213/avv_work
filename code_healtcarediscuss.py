@@ -25,6 +25,8 @@ class healthcare(object):
 
 
     def __init__(self):
+        self.recent_link = []
+
         f = open("proxies_808.txt")
         proxies_list = f.readlines()
 
@@ -52,7 +54,6 @@ class healthcare(object):
         self.headers = {"User-Agent" :"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0"}
 
 
-
     def make_proxy(self, proxie):
         proxie = proxie.strip()
 
@@ -68,17 +69,16 @@ class healthcare(object):
         # page_return = get_url_helper.delay(self.headers, self.proxies_url_list, url)
         # print page_return.get()
         page_return = get_url_helper(self.headers, self.proxies_url_list, url)
-        print page_return
+
+        if page_return:
+            self.get_home_soup(page_return)
 
 
     def get_home_soup(self, page):
         soup = BeautifulSoup(page, 'html.parser')
 
         all_title = soup.find_all("h2", {"class":"post-title"})
-        self.recent_link = [h2_post_tile.find("a").get("href") for h2_post_tile  in all_title]
-
-        # all_title = [<h2 class="post-title"><a href="http://www.healthcaresdiscussion.com/slimera-garcinia-cambogia/">Slimera Garcinia Cambogia</a></h2>]
-
+        self.recent_link.extend([h2_post_tile.find("a").get("href") for h2_post_tile  in all_title])
 
 
 def mainthread2(i, q):
@@ -86,17 +86,13 @@ def mainthread2(i, q):
         try:
             obj.get_url_page(url=link)
             logging.debug(link)
-
         except:
             pass
-
 
         time.sleep(2)
         q.task_done()
 
     q.task_done()
-
-
 
 
 def supermain():
@@ -126,7 +122,3 @@ def supermain():
 
 if __name__=="__main__":
     supermain()
-
-
-
-

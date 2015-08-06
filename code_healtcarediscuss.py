@@ -2,7 +2,17 @@ from requests import Session
 from random import choice
 import requests
 from bs4 import BeautifulSoup
-from tasks import *
+# from tasks import *
+from helper import *
+import logging
+import time
+import multiprocessing
+
+
+logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] (%(threadName)-10s) %(message)s')
+
+num_fetch_threads = 20
+enclosure_queue = multiprocessing.JoinableQueue()
 
 
 class healthcare(object):
@@ -42,6 +52,7 @@ class healthcare(object):
         self.headers = {"User-Agent" :"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:28.0) Gecko/20100101 Firefox/28.0"}
 
 
+
     def make_proxy(self, proxie):
         proxie = proxie.strip()
 
@@ -54,7 +65,10 @@ class healthcare(object):
 
 
     def get_url_page(self, url="http://www.healthcaresdiscussion.com/"):
-        page_return = get_url_helper.delay(self.headers, self.proxies_url_list, url)
+        # page_return = get_url_helper.delay(self.headers, self.proxies_url_list, url)
+        # print page_return.get()
+        page_return = get_url_helper(self.headers, self.proxies_url_list, url)
+        print page_return
 
 
     def get_home_soup(self, page):
@@ -66,15 +80,52 @@ class healthcare(object):
         # all_title = [<h2 class="post-title"><a href="http://www.healthcaresdiscussion.com/slimera-garcinia-cambogia/">Slimera Garcinia Cambogia</a></h2>]
 
 
-if __name__=="__main__":
+
+def mainthread2(i, q):
+    for obj, link in iter(q.get, None):
+        try:
+            obj.get_url_page(url=link)
+            logging.debug(link)
+
+        except:
+            pass
+
+
+        time.sleep(2)
+        q.task_done()
+
+    q.task_done()
+
+
+
+
+def supermain():
     obj = healthcare()
 
-    link_list = ["http://www.healthcaresdiscussion.com/page/3/, "
-                "http://www.healthcaresdiscussion.com/page/2/,"
+    link_list = ["http://www.healthcaresdiscussion.com/page/3/",
+                "http://www.healthcaresdiscussion.com/page/2/",
                 "http://www.healthcaresdiscussion.com"]
 
+    procs = []
+
+    for i in range(num_fetch_threads):
+        procs.append(multiprocessing.Process(target=mainthread2, args=(i, enclosure_queue,)))
+        procs[-1].start()
+
     for link in link_list:
-        page = obj.get_url_page(url=link)
+        enclosure_queue.put((obj, link))
+        enclosure_queue.join()
+
+    for p in procs:
+        enclosure_queue.put(None)
+        enclosure_queue.join()
+
+    for p in procs:
+        p.join(120)
+
+
+if __name__=="__main__":
+    supermain()
 
 
 

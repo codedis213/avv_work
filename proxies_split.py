@@ -1,4 +1,4 @@
-# import requests
+import requests
 from random import choice
 from requests import Session
 
@@ -16,7 +16,7 @@ class Requests_Proxy(object):
     make list of proxy dict with authentication
 
     call method
-
+    >>> from proxies_split import Requests_Proxy
     >>> obj = Requests_Proxy(filename="proxies_list.txt")
     >>> r = obj.fetch_url(url="https://pypi.python.org/pypi/requests/")
     >>> print r.status_code
@@ -68,8 +68,9 @@ class Requests_Proxy(object):
 
         for l in xrange(3):
             proxies_url = self.make_proxy_url()
-
+            proxies_url = "http://82.209.49.200:8080"
             print proxies_url
+
 
             proxies = {
                 # "http": "http://eric316:india123@93.127.146.106:80/",
@@ -79,8 +80,9 @@ class Requests_Proxy(object):
             }
 
             try:
-                session = Session()
-                r = session.get(url,  proxies=proxies, headers=headers, timeout=5)
+                # session = Session()
+                # r = session.get(url,  proxies=proxies, headers=headers, timeout=5)
+                r = requests.get(url,  proxies=proxies,)
                 print r.status_code
 
                 if r.status_code in [200, 301]:
@@ -102,5 +104,5 @@ class Requests_Proxy(object):
 
 if __name__=="__main__":
     obj = Requests_Proxy(filename="proxies_list.txt")
-    page = obj.fetch_url(url="https://pypi.python.org/pypi/requests/")
+    page = obj.fetch_url(url="http://www.optimalstackfacts.org/")
     # print page

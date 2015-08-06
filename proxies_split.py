@@ -1,5 +1,6 @@
-import requests
+# import requests
 from random import choice
+from requests import Session
 
 
 class Requests_Proxy(object):
@@ -27,6 +28,7 @@ class Requests_Proxy(object):
         f = open(filename)
         proxies_list = f.readlines()
         self.proxies_list = map(self.proxies_split_fun, proxies_list)
+        self.headers = {'User-Agent':'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:23.0) Gecko/20100101 Firefox/23.0'}
 
 
     def proxies_split_fun(self, proxie):
@@ -49,10 +51,11 @@ class Requests_Proxy(object):
         :return: proxies_url
         """
         proxies_single_dict = choice(self.proxies_list)
-        self.proxies_url = "http://%s:%s@%s:%s/" %(proxies_single_dict["username"],
+        proxies_url = "http://%s:%s@%s:%s/" %(proxies_single_dict["username"],
                                               proxies_single_dict["password"],
                                               proxies_single_dict["ip"],
                                               proxies_single_dict["port"])
+        return proxies_url
 
 
     def fetch_url(self, url="https://pypi.python.org/pypi/requests/"):
@@ -60,26 +63,44 @@ class Requests_Proxy(object):
         :param url:
         :return: request content i.e r
         """
-        self.make_proxy_url()
-        proxies_url = self.proxies_url
 
-        print proxies_url
+        headers = self.headers
 
-        proxies = {
-            # "http": "http://eric316:india123@93.127.146.106:80/",
-            "http": proxies_url,
-            "http": proxies_url
+        for l in xrange(3):
+            proxies_url = self.make_proxy_url()
 
-        }
+            print proxies_url
 
-        r = requests.get(url, proxies=proxies)
-        print r.status_code
-        return r
+            proxies = {
+                # "http": "http://eric316:india123@93.127.146.106:80/",
+                "http": proxies_url,
+                "http": proxies_url
+
+            }
+
+            try:
+                session = Session()
+                r = session.get(url,  proxies=proxies, headers=headers, timeout=5)
+                print r.status_code
+
+                if r.status_code in [200, 301]:
+
+                    page = r.content
+                    r.cookies.clear()
+                    r.close()
+
+                    return page
+
+                else:
+                    r.cookies.clear()
+                    r.close()
+            except:
+                pass
 
 
 
 
 if __name__=="__main__":
     obj = Requests_Proxy(filename="proxies_list.txt")
-    r = obj.fetch_url(url="https://pypi.python.org/pypi/requests/")
-    print r.status_code
+    page = obj.fetch_url(url="https://pypi.python.org/pypi/requests/")
+    # print page

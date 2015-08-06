@@ -1,6 +1,7 @@
 from requests import Session
 from random import choice
 import requests
+from bs4 import BeautifulSoup
 
 
 
@@ -84,10 +85,29 @@ class healthcare(object):
                 pass
 
 
+        def get_home_soup(self, page):
+            soup = BeautifulSoup(page, 'html.parser')
+            all_title = soup.find_all("h2", {"class":"post-title"})
+
+            self.recent_link = [h2_post_tile.find("a").get("href") for h2_post_tile  in all_title]
+
+
+            # all_title = [<h2 class="post-title"><a href="http://www.healthcaresdiscussion.com/slimera-garcinia-cambogia/">Slimera Garcinia Cambogia</a></h2>]
+
+
+
+
+
+
+
+
 
 if __name__=="__main__":
     obj = healthcare()
     page = obj.get_url_page()
+    list = ["http://www.healthcaresdiscussion.com/page/3/, "
+            "http://www.healthcaresdiscussion.com/page/2/,"
+            "http://www.healthcaresdiscussion.com"]
     print page
 
 

@@ -102,60 +102,58 @@ class HealthCaresDiscussion(object):
 
         entry_content_div = primary_div.find("div", {"class":"entry-content"})
 
-        sql = """SELECT * FROM avv_blog_scrap_table WHERE blog_link = '%s' """ % (self.my_strip(post_title_link))
 
-        self.cursor.execute(sql)
+        sql = """INSERT INTO avv_blog_scrap_table
+                (domain_name, domain_link, main_title, main_title_link,
+                blog_title, blog_link, category_title, category_link,
+                sub_category_title, sub_category_link,
+                entry_content)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
 
-        results = self.cursor.fetchall()
+        extracted_data = (self.domain_name, self.domain_link, main_title_text,
+                          main_title_link, post_title_text, post_title_link,
+                          category, category_link, '', '', entry_content_div)
 
-        if not results:
+        extracted_data = map(self.my_strip, extracted_data)
+        sql = sql % tuple(extracted_data)
 
-            sql = """INSERT INTO avv_blog_scrap_table
-                    (domain_name, domain_link, main_title, main_title_link,
-                    blog_title, blog_link, category_title, category_link,
-                    sub_category_title, sub_category_link,
-                    entry_content)
-                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
+        commited = False
 
-            extracted_data = (self.domain_name, self.domain_link, main_title_text,
-                              main_title_link, post_title_text, post_title_link,
-                              category, category_link, '', '', entry_content_div)
-
-            extracted_data = map(self.my_strip, extracted_data)
-            sql = sql % tuple(extracted_data)
-
-            commited = False
-
-            try:
-                self.cursor.execute(sql)
-                self.db.commit()
-                commited = True
-                print "entered............"
-            except:
-                self.db.rollback()
-                print"rollback........"
+        try:
+            self.cursor.execute(sql)
+            self.db.commit()
+            commited = True
+            print "entered............"
+        except:
+            self.db.rollback()
+            print"rollback........"
 
 
-            if commited:
-                to = ["jaiprakassingh213@gmail.com"]
-                subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
-                message = """Hi
-                            "new blog on %s
-                            whose details are under follow
-                            title ==> %s
-                            link ==> %s"""
-                message = message %(self.domain_name, post_title_text, post_title_link)
+        if commited:
+            to = ["jaiprakassingh213@gmail.com"]
+            subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
+            message = """Hi
+                        "new blog on %s
+                        whose details are under follow
+                        title ==> %s
+                        link ==> %s"""
+            message = message %(self.domain_name, post_title_text, post_title_link)
 
-                self.send_simple_message(to, subject, message)
-                print "maill sent "
+            self.send_simple_message(to, subject, message)
+            print "maill sent "
 
 
 
     def get_page_next_link(self, link):
-        r2 = self.req_proxy(link=link)
-        page2 = r2.content
-        r2.close()
-        self.get_detail_next_page(link, page2)
+        sql = """SELECT * FROM avv_blog_scrap_table WHERE blog_link = '%s' """ % (self.my_strip(link))
+        self.cursor.execute(sql)
+        results = self.cursor.fetchall()
+
+        if not results:
+            r2 = self.req_proxy(link=link)
+            page2 = r2.content
+            r2.close()
+            self.get_detail_next_page(link, page2)
 
 
     def open_home_page(self):

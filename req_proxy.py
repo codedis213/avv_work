@@ -7,7 +7,6 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] (%(threadName)-
 
 def main(link):
     f = open("proxies_list.txt")
-    #f = open("/home/user1/proxy_http_auth.txt")
     pass_ip_list = f.readlines()
     print pass_ip_list
     f.close()
@@ -17,15 +16,18 @@ def main(link):
     for l in xrange(2):
         pass_ip = choice(pass_ip_list)
         pass_ip = pass_ip.strip()
+        # pass_ip = "eric316:india123@%s" %("93.127.146.106:80")
         pass_ip = "eric316:india123@%s" %("93.127.146.106:80")
 
         try:
             http_proxy = "http://" + pass_ip
 
-            proxyDict = {"http"  :http_proxy}
+            proxyDict = {"http"  :http_proxy,
+                         "https" :http_proxy
+                         }
             #r = requests.get(link,  proxies = proxyDict, headers=headers, timeout = 5)
             session = Session()
-            r = session.get(link,  proxies = proxyDict, headers=headers, timeout = 5)
+            r = session.get(link,  proxies = proxyDict, headers=headers, timeout = 15)
             #r = session.get(link)
 
             if r.status_code in [200, 301]:

@@ -129,18 +129,18 @@ class HealthCaresDiscussion(object):
             print"rollback........"
 
 
-        if commited:
-            to = ["jaiprakassingh213@gmail.com"]
-            subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
-            message = """Hi
-                        "new blog on %s
-                        whose details are under follow
-                        title ==> %s
-                        link ==> %s"""
-            message = message %(self.domain_name, post_title_text, post_title_link)
-
-            self.send_simple_message(to, subject, message)
-            print "maill sent "
+        # if commited:
+        #     to = ["jaiprakassingh213@gmail.com"]
+        #     subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
+        #     message = """Hi
+        #                 "new blog on %s
+        #                 whose details are under follow
+        #                 title ==> %s
+        #                 link ==> %s"""
+        #     message = message %(self.domain_name, post_title_text, post_title_link)
+        #
+        #     self.send_simple_message(to, subject, message)
+        #     print "maill sent "
 
 
 
@@ -167,8 +167,26 @@ class HealthCaresDiscussion(object):
         map(self.get_page_next_link, link_to_extract)
 
 
+
+    def prev_home_page(self):
+        self.creat_avv_blog_scrap_table()
+        link_lists = ['http://www.healthcaresdiscussion.com/page/2/',
+                      'http://www.healthcaresdiscussion.com/page/3/']
+
+        for link in link_lists:
+            r = self.req_proxy(link=link)
+            page = r.content
+            r.close()
+
+            link_to_extract = self.get_all_link_home_page(page)
+
+            map(self.get_page_next_link, link_to_extract)
+
+
+
 if __name__ == "__main__":
     obj = HealthCaresDiscussion()
-    obj.open_home_page()
+    # obj.open_home_page()
+    obj.prev_home_page()
 
 

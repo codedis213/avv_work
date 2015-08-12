@@ -30,9 +30,9 @@ class AvvBlogScrapTableAdmin(admin.ModelAdmin):
         ('Sub category',               {'fields': ['sub_category_link', 'sub_category_title'], 'classes': ['collapse']}),
         ('Entry content', {'fields': ['entry_content_html', 'entry_content_text'], 'classes': ['collapse']}),
     ]
-    list_display = ('domain_name', 'main_title', 'main_title_link')
+    list_display = ('domain_name', 'blog_title', 'blog_link')
     list_filter = ['created_on']
-    search_fields = ['domain_name', 'main_title', 'main_title_link', 'category_title', ]
+    search_fields = ['domain_name', 'blog_link', 'blog_link', 'category_title', ]
 
 
 

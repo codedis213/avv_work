@@ -145,18 +145,18 @@ class HealthCaresDiscussion(object):
             print"rollback........"
 
 
-        if commited:
-            to = ["jaiprakashsingh213@gmail.com"]
-            subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
-            message = """Hi
-                        "new blog on %s
-                        whose details are under follow
-                        title ==> %s
-                        link ==> %s"""
-            message = message %(self.domain_name, post_title_text, post_title_link)
-
-            self.send_simple_message(to, subject, message)
-            print "maill sent "
+        # if commited:
+        #     to = ["jaiprakashsingh213@gmail.com"]
+        #     subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
+        #     message = """Hi
+        #                 "new blog on %s
+        #                 whose details are under follow
+        #                 title ==> %s
+        #                 link ==> %s"""
+        #     message = message %(self.domain_name, post_title_text, post_title_link)
+        #
+        #     self.send_simple_message(to, subject, message)
+        #     print "maill sent "
 
 
 

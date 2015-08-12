@@ -49,3 +49,9 @@ class AvvBlogScrapTable(models.Model):
 
     def __str__(self):              # __unicode__ on Python 2
         return "%s ==> %s" %(self.domain_name, self.main_title)
+
+
+class LinkHandling(models.Model):
+    domain_name = models.CharField(max_length=70, blank=True, null=True)
+    domain_link = models.URLField()
+    active = models.BooleanField(default=True)

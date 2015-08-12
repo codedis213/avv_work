@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Question, AvvBlogScrapTable
+from .models import Choice, Question, AvvBlogScrapTable, LinkHandling
 
 
 class ChoiceInline(admin.TabularInline):
@@ -35,6 +35,17 @@ class AvvBlogScrapTableAdmin(admin.ModelAdmin):
     search_fields = ['domain_name', 'blog_link', 'blog_link', 'category_title', ]
 
 
-
 admin.site.register(AvvBlogScrapTable, AvvBlogScrapTableAdmin)
+
+
+class LinkHandlingAdmin(admin.ModelAdmin):
+    list_display = ('domain_name', 'domain_link', 'active', 'created_on', 'changed_on')
+    list_filter = ['domain_name', 'domain_link', 'active', 'created_on', 'changed_on']
+    search_fields = ['domain_name', 'domain_link']
+
+admin.site.register(LinkHandling, LinkHandlingAdmin)
+
+
+
+
 

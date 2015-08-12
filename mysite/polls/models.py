@@ -55,3 +55,5 @@ class LinkHandling(models.Model):
     domain_name = models.CharField(max_length=70, blank=True, null=True)
     domain_link = models.URLField()
     active = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    changed_on = models.DateTimeField(auto_now=True)

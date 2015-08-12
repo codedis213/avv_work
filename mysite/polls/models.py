@@ -40,7 +40,7 @@ class AvvBlogScrapTable(models.Model):
     sub_category_title = models.CharField(max_length=70, null=True, blank=True)
     sub_category_link = models.URLField(blank=True, null=True)
     entry_content_html = models.TextField()
-    entry_content_text = models.TextField(null=True)
+    entry_content_text = models.TextField(null=True, blank= True)
     created_on = models.DateTimeField(auto_now_add=True)
     changed_on = models.DateTimeField(auto_now=True)
 

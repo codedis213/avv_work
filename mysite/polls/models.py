@@ -25,3 +25,27 @@ class Choice(models.Model):
 
     def __str__(self):              # __unicode__ on Python 2
         return self.choice_text
+
+
+
+class AvvBlogScrapTable(models.Model):
+    domain_name = models.CharField(max_length=70)
+    domain_link = models.URLField()
+    main_title = models.CharField(max_length=70)
+    main_title_link = models.URLField()
+    blog_title = models.CharField(max_length=70)
+    blog_link = models.URLField()
+    category_title = models.CharField(max_length=70, null=True)
+    category_link = models.URLField(null=True)
+    sub_category_title = models.CharField(max_length=70, null=True, blank=True)
+    sub_category_link = models.URLField(blank=True, null=True)
+    entry_content_html = models.TextField()
+    entry_content_text = models.TextField(null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    changed_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "avv_blog_scrap_table"
+
+    def __str__(self):              # __unicode__ on Python 2
+        return "%s ==> %s" %(self.domain_name, self.main_title)

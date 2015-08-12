@@ -22,10 +22,14 @@ admin.site.register(Question, QuestionAdmin)
 
 
 class AvvBlogScrapTableAdmin(admin.ModelAdmin):
-    # fieldsets = [
-    #     (None,               {'fields': ['question_text']}),
-    #     ('Html Content  ', {'fields': ['pub_date'], 'classes': ['collapse']}),
-    # ]
+    fieldsets = [
+        ('Domain',               {'fields': ['domain_name', 'domain_link'], 'classes': ['collapse']}),
+        ('Main',               {'fields': ['main_title', 'main_title_link'], 'classes': ['collapse']}),
+        ('Blog',               {'fields': ['blog_title', 'blog_link'], 'classes': ['collapse']}),
+        ('Category',               {'fields': ['category_title', 'category_link'], 'classes': ['collapse']}),
+        ('Sub category',               {'fields': ['sub_category_link', 'sub_category_title'], 'classes': ['collapse']}),
+        ('Entry content', {'fields': ['entry_content_html', 'entry_content_text'], 'classes': ['collapse']}),
+    ]
     list_display = ('domain_name', 'main_title', 'main_title_link')
     list_filter = ['created_on']
     search_fields = ['domain_name', 'main_title', 'main_title_link', 'category_title', ]

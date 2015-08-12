@@ -40,32 +40,34 @@ class HealthCaresDiscussion(object):
 
 
     def creat_avv_blog_scrap_table(self):
-        # sql_stmnt = """CREATE TABLE IF NOT EXISTS avv_blog_scrap_table (
-        #                   id int(11) NOT NULL AUTO_INCREMENT,
-        #                   domain_name varchar(70) DEFAULT NULL,
-        #                   domain_link  varchar(255) DEFAULT NULL,
-        #                   main_title varchar(100) DEFAULT NULL,
-        #                   main_title_link varchar(255) DEFAULT NULL,
-        #                   blog_title varchar(100) DEFAULT NULL,
-        #                   blog_link varchar(255) DEFAULT NULL,
-        #                   category_title varchar(100) DEFAULT NULL,
-        #                   category_link varchar(255) DEFAULT NULL,
-        #                   sub_category_title varchar(100) DEFAULT NULL,
-        #                   sub_category_link varchar(255) DEFAULT NULL,
-        #                   entry_content text DEFAULT NULL,
-        #                   created_on TIMESTAMP DEFAULT 0,
-        #                   changed_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        #                   PRIMARY KEY (id)
-        #                 )"""
+        sql_stmnt = """CREATE TABLE IF NOT EXISTS avv_blog_scrap_table (
+                          id int(11) NOT NULL AUTO_INCREMENT,
+                          domain_name varchar(70) DEFAULT NULL,
+                          domain_link  varchar(255) DEFAULT NULL,
+                          main_title varchar(100) DEFAULT NULL,
+                          main_title_link varchar(255) DEFAULT NULL,
+                          blog_title varchar(100) DEFAULT NULL,
+                          blog_link varchar(255) DEFAULT NULL,
+                          category_title varchar(100) DEFAULT NULL,
+                          category_link varchar(255) DEFAULT NULL,
+                          sub_category_title varchar(100) DEFAULT NULL,
+                          sub_category_link varchar(255) DEFAULT NULL,
+                          entry_content text DEFAULT NULL,
+                          created_on TIMESTAMP DEFAULT 0,
+                          changed_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                          PRIMARY KEY (id)
+                        )"""
 
-        sql_stmnt = """
-          CREATE TABLE `avv_blog_scrap_table` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
-         `domain_name` varchar(70) NOT NULL, `domain_link` varchar(200) NOT NULL, `main_title` varchar(70) NOT NULL,
-         `main_title_link` varchar(200) NOT NULL, `blog_title` varchar(70) NOT NULL, `blog_link` varchar(200) NOT NULL,
-         `category_title` varchar(70) NULL, `category_link` varchar(200) NULL, `sub_category_title` varchar(70) NULL,
-         `sub_category_link` varchar(200) NULL, `entry_content_html` longtext NOT NULL,
-         `entry_content_text` longtext NULL, `created_on` datetime NOT NULL,
-         `changed_on` datetime NOT NULL)"""
+        # sql_stmnt = """
+        # BEGIN;
+        # CREATE TABLE `avv_blog_scrap_table` (`id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        # `domain_name` varchar(70) NOT NULL, `domain_link` varchar(200) NOT NULL, `main_title` varchar(70) NOT NULL,
+        # `main_title_link` varchar(200) NOT NULL, `blog_title` varchar(70) NOT NULL, `blog_link` varchar(200) NOT NULL,
+        # `category_title` varchar(70) NULL, `category_link` varchar(200) NULL, `sub_category_title` varchar(70) NULL,
+        # `sub_category_link` varchar(200) NULL, `entry_content_html` longtext NOT NULL, `entry_content_text` longtext NULL,
+        # `created_on` datetime NOT NULL, `changed_on` datetime NOT NULL);
+        # COMMIT;
+        # """
 
 
 

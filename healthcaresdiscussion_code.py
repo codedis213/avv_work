@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import MySQLdb
+from datetime import datetime
 
 
 class HealthCaresDiscussion(object):
@@ -52,7 +53,8 @@ class HealthCaresDiscussion(object):
                           category_link varchar(255) DEFAULT NULL,
                           sub_category_title varchar(100) DEFAULT NULL,
                           sub_category_link varchar(255) DEFAULT NULL,
-                          entry_content text DEFAULT NULL,
+                          entry_content_html longtext NOT NULL,
+                          entry_content_text longtext NULL,
                           created_on TIMESTAMP DEFAULT 0,
                           changed_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                           PRIMARY KEY (id)
@@ -74,7 +76,7 @@ class HealthCaresDiscussion(object):
         self.cursor.execute(sql_stmnt)
 
 
-    def req_proxy(self, proxy_ip= "77.245.110.213:8080", link= "http://www.healthcaresdiscussion.com/"):
+    def req_proxy(self, proxy_ip= "183.207.229.204:8080", link= "http://www.healthcaresdiscussion.com/"):
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:23.0) Gecko/20100101 Firefox/23.0'}
         http_proxy = "http://%s" % proxy_ip
         print http_proxy
@@ -120,17 +122,18 @@ class HealthCaresDiscussion(object):
                 (domain_name, domain_link, main_title, main_title_link,
                 blog_title, blog_link, category_title, category_link,
                 sub_category_title, sub_category_link,
-                entry_content)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
+                entry_content_html, created_on, changed_on)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
 
         extracted_data = (self.domain_name, self.domain_link, main_title_text,
                           main_title_link, post_title_text, post_title_link,
-                          category, category_link, '', '', entry_content_div)
+                          category, category_link, '', '', entry_content_div, datetime.now(), datetime.now())
 
         extracted_data = map(self.my_strip, extracted_data)
         sql = sql % tuple(extracted_data)
 
         commited = False
+
 
         try:
             self.cursor.execute(sql)

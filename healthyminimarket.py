@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import MySQLdb
 from datetime import datetime
+from req_proxy import main_req
 
 
 class HealthyMiniMarket(object):
@@ -64,7 +65,7 @@ class HealthyMiniMarket(object):
         self.cursor.execute(sql_stmnt)
 
 
-    def req_proxy(self, proxy_ip= "14.152.49.194:8080", link= "http://www.healthyminimarket.com?"):
+    def req_proxy(self, proxy_ip= "14.152.49.194:8080", link= "http://www.healthyminimarket.com"):
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:23.0) Gecko/20100101 Firefox/23.0'}
         http_proxy = "http://%s" % proxy_ip
         print http_proxy
@@ -161,25 +162,37 @@ class HealthyMiniMarket(object):
         results = self.cursor.fetchall()
 
         if not results:
-            r2 = self.req_proxy(link=link)
-            page2 = r2.content
-            r2.close()
-            self.get_detail_next_page(link, page2)
+            # r2 = self.req_proxy(link=link)
+            # page2 = r2.content
+            # r2.close()
 
+            page2 = main_req(link)
+
+            if page2:
+                self.get_detail_next_page(link, page2)
 
 
     def get_link_from_first_page(self, page):
         soup = BeautifulSoup(page, "html.parser")
+
         h2_div_list = soup.find_all("h2", {"class":"entry-title"})
+
         all_link_home_page = [h2_obj.find("a").get("href") for h2_obj in h2_div_list]
         map(self.get_page_next_link, all_link_home_page)
 
 
     def home_page_link(self):
-        r = self.req_proxy()
-        page = r.content
-        r.close()
-        self.get_link_from_first_page(page)
+        self.creat_avv_blog_scrap_table()
+
+        # r = self.req_proxy()
+        # page = r.content
+        # r.close()
+
+        link = "http://www.healthyminimarket.com"
+        page = main_req(link)
+
+        if page:
+            self.get_link_from_first_page(page)
 
 
 if __name__ == "__main__":

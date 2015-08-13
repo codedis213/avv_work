@@ -188,11 +188,27 @@ class HealthyMiniMarket(object):
         # page = r.content
         # r.close()
 
-        link = "http://www.healthyminimarket.com"
-        page = main_req(link)
+        link_list = ["http://www.healthyminimarket.com",
+                     "http://www.healthyminimarket.com/page/2/",
+                     "http://www.healthyminimarket.com/page/3/",
+                     "http://www.healthyminimarket.com/page/4/",
+                     "http://www.healthyminimarket.com/page/5/",
+                     "http://www.healthyminimarket.com/page/6/",
+                     "http://www.healthyminimarket.com/page/7/",
+                     "http://www.healthyminimarket.com/page/8/",
+                     "http://www.healthyminimarket.com/page/9/",
+                     "http://www.healthyminimarket.com/page/10/",
+                     "http://www.healthyminimarket.com/page/11/",
+                     "http://www.healthyminimarket.com/page/12/",
+                     "http://www.healthyminimarket.com/page/13/",
+                     "http://www.healthyminimarket.com/page/15/",
+                     "http://www.healthyminimarket.com/page/16/"]
 
-        if page:
-            self.get_link_from_first_page(page)
+        for link in link_list:
+            page = main_req(link)
+
+            if page:
+                self.get_link_from_first_page(page)
 
 
 if __name__ == "__main__":

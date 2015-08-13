@@ -26,7 +26,7 @@ def main_req(link):
             session = Session()
             r = session.get(link,  proxies = proxyDict, headers=headers, timeout = 15)
 
-            if r.status_code in [200, 301, 302]:
+            if r.status_code in range(200,399):
                 page = r.content
                 logging.debug(r.status_code)
                 r.cookies.clear()

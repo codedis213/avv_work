@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc6be871-01ef-4156-bfe9-a43377a38b4d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/healthyminimarket.py" afterPath="$PROJECT_DIR$/healthyminimarket.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/healthcaresdiscussion_code.py" afterPath="$PROJECT_DIR$/healthcaresdiscussion_code.py" />
     </list>
     <ignored path="avv_work.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="healthcaresdiscussion_code.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="healthcaresdiscussion_code.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/healthcaresdiscussion_code.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.892857">
-              <caret line="178" column="8" selection-start-line="178" selection-start-column="8" selection-end-line="178" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.7668394">
+              <caret line="130" column="106" selection-start-line="130" selection-start-column="106" selection-end-line="130" selection-end-column="106" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -35,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="healthyminimarket.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="healthyminimarket.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/healthyminimarket.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6919275">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="41" column="16" selection-start-line="31" selection-start-column="4" selection-end-line="41" selection-end-column="16" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -92,9 +92,9 @@
         <option value="$PROJECT_DIR$/mysite/polls/admin.py" />
         <option value="$PROJECT_DIR$/proxies_808.txt" />
         <option value="$PROJECT_DIR$/mysite/healthyminimarket.py" />
-        <option value="$PROJECT_DIR$/healthcaresdiscussion_code.py" />
         <option value="$PROJECT_DIR$/req_proxy.py" />
         <option value="$PROJECT_DIR$/healthyminimarket.py" />
+        <option value="$PROJECT_DIR$/healthcaresdiscussion_code.py" />
       </list>
     </option>
   </component>
@@ -330,7 +330,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1368" height="742" extended-state="7" />
+    <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -560,16 +560,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/healthcaresdiscussion_code.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.892857">
-          <caret line="178" column="8" selection-start-line="178" selection-start-column="8" selection-end-line="178" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proxies_808.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -590,8 +580,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/healthyminimarket.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6919275">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="16" selection-start-line="31" selection-start-column="4" selection-end-line="41" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/healthcaresdiscussion_code.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7668394">
+          <caret line="130" column="106" selection-start-line="130" selection-start-column="106" selection-end-line="130" selection-end-column="106" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

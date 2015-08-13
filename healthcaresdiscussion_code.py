@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import MySQLdb
 from datetime import datetime
+from req_proxy import main_req
 
 
 class HealthCaresDiscussion(object):
@@ -32,10 +33,13 @@ class HealthCaresDiscussion(object):
     def my_strip(self, x):
         try:
             x = self.db.escape_string(x)
-
         except:
-            x = str(x).strip()
-            # x = str(x.encode("ascii", "ignore")).strip()
+            try:
+                x = str(x).strip()
+            except:
+                x = str(x.encode("ascii", "ignore")).strip()
+                x = self.db.escape_string(x)
+
         return x
 
 
@@ -124,7 +128,7 @@ class HealthCaresDiscussion(object):
                 blog_title, blog_link, category_title, category_link,
                 sub_category_title, sub_category_link,
                 entry_content_html, entry_content_text, created_on, changed_on)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s)"""
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
 
         extracted_data = (self.domain_name, self.domain_link, main_title_text,
                           main_title_link, post_title_text, post_title_link,
@@ -169,21 +173,24 @@ class HealthCaresDiscussion(object):
         results = self.cursor.fetchall()
 
         if not results:
-            r2 = self.req_proxy(link=link)
-            page2 = r2.content
-            r2.close()
-            self.get_detail_next_page(link, page2)
+            # r2 = self.req_proxy(link=link)
+            # page2 = r2.content
+            # r2.close()
+            page2 = main_req(link)
+            if page2:
+                self.get_detail_next_page(link, page2)
 
 
     def open_home_page(self):
         self.creat_avv_blog_scrap_table()
-        r = self.req_proxy()
-        page = r.content
-        r.close()
-
-        link_to_extract = self.get_all_link_home_page(page)
-
-        map(self.get_page_next_link, link_to_extract)
+        # r = self.req_proxy()
+        # page = r.content
+        # r.close()
+        link = "http://www.healthcaresdiscussion.com"
+        page = main_req(link)
+        if page:
+            link_to_extract = self.get_all_link_home_page(page)
+            map(self.get_page_next_link, link_to_extract)
 
 
 

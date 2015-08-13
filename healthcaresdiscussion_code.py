@@ -116,18 +116,21 @@ class HealthCaresDiscussion(object):
         category = category_div.get_text()
 
         entry_content_div = primary_div.find("div", {"class":"entry-content"})
+        entry_content_text = primary_div.find("div", {"class":"entry-content"}).get_text()
 
 
         sql = """INSERT INTO avv_blog_scrap_table
                 (domain_name, domain_link, main_title, main_title_link,
                 blog_title, blog_link, category_title, category_link,
                 sub_category_title, sub_category_link,
-                entry_content_html, created_on, changed_on)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
+                entry_content_html, entry_content_text, created_on, changed_on)
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s)"""
 
         extracted_data = (self.domain_name, self.domain_link, main_title_text,
                           main_title_link, post_title_text, post_title_link,
-                          category, category_link, '', '', entry_content_div, datetime.now(), datetime.now())
+                          category, category_link, '', '', entry_content_div,
+                          entry_content_text,
+                          datetime.now(), datetime.now())
 
         extracted_data = map(self.my_strip, extracted_data)
         sql = sql % tuple(extracted_data)

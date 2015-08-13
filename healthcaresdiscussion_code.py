@@ -212,7 +212,7 @@ class HealthCaresDiscussion(object):
 
 if __name__ == "__main__":
     obj = HealthCaresDiscussion()
-    # obj.open_home_page()
-    obj.prev_home_page()
+    obj.open_home_page()
+    # obj.prev_home_page()
 
 

@@ -143,7 +143,7 @@ class HealthyMiniMarket(object):
 
 
         if commited:
-            to = ["jaiprakashsingh213@gmail.com"]
+            to = ["jaiprakashsingh213@gmail.com", 'santosh.kumar@wisepromo.com' ]
             subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
             message = """Hi
                         "new blog on %s

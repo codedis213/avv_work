@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'avv_blog_scrap',
-        'USER': 'rootavv',
+        'USER': 'root',
         'PASSWORD': 'rootavv',
         'HOST': '127.0.0.1',
         'PORT': '3306',

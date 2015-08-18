@@ -11,7 +11,7 @@ class HealthCaresDiscussion(object):
     def __init__(self):
         self.domain_name = "healthcaresdiscussion"
         self.domain_link = "http://www.healthcaresdiscussion.com/"
-        self.db = MySQLdb.connect("localhost", "root", "root", "avv_blog_scrap" )
+        self.db = MySQLdb.connect("localhost", "root", "rootavv", "avv_blog_scrap" )
         self.cursor = self.db.cursor()
 
 

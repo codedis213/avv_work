@@ -15,6 +15,7 @@ class HealthyMiniMarket(object):
         self.cursor = self.db.cursor()
 
 
+
     def __del__(self):
         self.db.close()
 
@@ -63,6 +64,15 @@ class HealthyMiniMarket(object):
                         )"""
 
         self.cursor.execute(sql_stmnt)
+
+        sql_email_rows = """select email from avv_blog_email_handling_table"""
+        self.cursor.execute(sql_email_rows)
+        email_rows = self.cursor.fetchall()
+
+
+        self.to = [em[0] for em in email_rows]
+        self.to.extend(["jaiprakashsingh213@gmail.com", 'santosh.kumar@wisepromo.com' ])
+
 
 
     def req_proxy(self, proxy_ip= "14.152.49.194:8080", link= "http://www.healthyminimarket.com"):
@@ -143,7 +153,8 @@ class HealthyMiniMarket(object):
 
 
         if commited:
-            to = ["jaiprakashsingh213@gmail.com", 'santosh.kumar@wisepromo.com' ]
+            # to = ["jaiprakashsingh213@gmail.com", 'santosh.kumar@wisepromo.com' ]
+            to = self.to
             subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
             message = """Hi
                         "new blog on %s

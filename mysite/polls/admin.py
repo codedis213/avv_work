@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Question, AvvBlogScrapTable, LinkHandling
+from .models import *
 
 
 # class ChoiceInline(admin.TabularInline):
@@ -45,6 +45,7 @@ class LinkHandlingAdmin(admin.ModelAdmin):
 
 admin.site.register(LinkHandling, LinkHandlingAdmin)
 
+admin.site.register(EmailHandling)
 
 
 

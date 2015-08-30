@@ -57,3 +57,26 @@ class LinkHandling(models.Model):
     active = models.BooleanField(default=True)
     created_on = models.DateTimeField(auto_now_add=True)
     changed_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "avv_blog_link_handling_table"
+
+    def __str__(self):              # __unicode__ on Python 2
+        return "%s" %(self.domain_name)
+
+
+
+class EmailHandling(models.Model):
+    email = models.EmailField(blank=False, null=False, unique=True)
+    is_staff = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    changed_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "avv_blog_email_handling_table"
+
+    def __str__(self):              # __unicode__ on Python 2
+        return "%s" %(self.email)
+
+

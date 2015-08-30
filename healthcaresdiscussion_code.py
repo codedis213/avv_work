@@ -79,6 +79,10 @@ class HealthCaresDiscussion(object):
 
         self.cursor.execute(sql_stmnt)
 
+        sql = """SELECT * FROM avv_blog_scrap_table WHERE blog_title = '%s' """ % (self.my_strip(post_title_text))
+        self.cursor.execute(sql)
+        results = self.cursor.fetchall()
+
 
     def req_proxy(self, proxy_ip= "183.207.229.204:8080", link= "http://www.healthcaresdiscussion.com/"):
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:23.0) Gecko/20100101 Firefox/23.0'}
@@ -153,7 +157,8 @@ class HealthCaresDiscussion(object):
 
 
         if commited:
-            to = ["jaiprakashsingh213@gmail.com", "santosh.kumar@wisepromo.com "]
+            # to = ["jaiprakashsingh213@gmail.com", "santosh.kumar@wisepromo.com "]
+            to = self.to
             subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
             message = """Hi
                         "new blog on %s

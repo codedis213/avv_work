@@ -45,7 +45,12 @@ class LinkHandlingAdmin(admin.ModelAdmin):
 
 admin.site.register(LinkHandling, LinkHandlingAdmin)
 
-admin.site.register(EmailHandling)
+class EmailHandlingAdmin(admin.ModelAdmin):
+    list_display = ('email', 'is_staff', 'is_active', 'created_on', 'changed_on')
+    list_filter = ['email', 'is_staff', 'is_active', 'created_on', 'changed_on']
+    search_fields = ['email']
+
+admin.site.register(EmailHandling, EmailHandlingAdmin)
 
 
 

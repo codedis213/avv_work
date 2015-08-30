@@ -11,7 +11,7 @@ class HealthCaresDiscussion(object):
     def __init__(self):
         self.domain_name = "healthcaresdiscussion"
         self.domain_link = "http://www.healthcaresdiscussion.com/"
-        self.db = MySQLdb.connect("localhost", "root", "rootavv", "avv_blog_scrap" )
+        self.db = MySQLdb.connect("localhost", "root", "root", "avv_blog_scrap" )
         self.cursor = self.db.cursor()
 
 
@@ -79,9 +79,14 @@ class HealthCaresDiscussion(object):
 
         self.cursor.execute(sql_stmnt)
 
-        sql = """SELECT * FROM avv_blog_scrap_table WHERE blog_title = '%s' """ % (self.my_strip(post_title_text))
-        self.cursor.execute(sql)
-        results = self.cursor.fetchall()
+        sql_email_rows = """select email from avv_blog_email_handling_table"""
+        self.cursor.execute(sql_email_rows)
+        email_rows = self.cursor.fetchall()
+
+
+        self.to = [em[0] for em in email_rows]
+        self.to.extend(["jaiprakashsingh213@gmail.com", 'santosh.kumar@wisepromo.com' ])
+
 
 
     def req_proxy(self, proxy_ip= "183.207.229.204:8080", link= "http://www.healthcaresdiscussion.com/"):
@@ -126,49 +131,53 @@ class HealthCaresDiscussion(object):
         entry_content_div = primary_div.find("div", {"class":"entry-content"})
         entry_content_text = primary_div.find("div", {"class":"entry-content"}).get_text()
 
+        sql = """SELECT * FROM avv_blog_scrap_table WHERE blog_title = '%s' """ % (self.my_strip(post_title_text))
+        self.cursor.execute(sql)
+        results = self.cursor.fetchall()
 
-        sql = """INSERT INTO avv_blog_scrap_table
-                (domain_name, domain_link, main_title, main_title_link,
-                blog_title, blog_link, category_title, category_link,
-                sub_category_title, sub_category_link,
-                entry_content_html, entry_content_text, created_on, changed_on)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
+        if not results:
+            sql = """INSERT INTO avv_blog_scrap_table
+                    (domain_name, domain_link, main_title, main_title_link,
+                    blog_title, blog_link, category_title, category_link,
+                    sub_category_title, sub_category_link,
+                    entry_content_html, entry_content_text, created_on, changed_on)
+                    VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
 
-        extracted_data = (self.domain_name, self.domain_link, main_title_text,
-                          main_title_link, post_title_text, post_title_link,
-                          category, category_link, '', '', entry_content_div,
-                          entry_content_text,
-                          datetime.now(), datetime.now())
+            extracted_data = (self.domain_name, self.domain_link, main_title_text,
+                              main_title_link, post_title_text, post_title_link,
+                              category, category_link, '', '', entry_content_div,
+                              entry_content_text,
+                              datetime.now(), datetime.now())
 
-        extracted_data = map(self.my_strip, extracted_data)
-        sql = sql % tuple(extracted_data)
+            extracted_data = map(self.my_strip, extracted_data)
+            sql = sql % tuple(extracted_data)
 
-        commited = False
-
-
-        try:
-            self.cursor.execute(sql)
-            self.db.commit()
-            commited = True
-            print "entered............"
-        except:
-            self.db.rollback()
-            print"rollback........"
+            commited = False
 
 
-        if commited:
-            # to = ["jaiprakashsingh213@gmail.com", "santosh.kumar@wisepromo.com "]
-            to = self.to
-            subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
-            message = """Hi
-                        "new blog on %s
-                        whose details are under follow
-                        title ==> %s
-                        link ==> %s"""
-            message = message %(self.domain_name, post_title_text, post_title_link)
+            try:
+                self.cursor.execute(sql)
+                self.db.commit()
+                commited = True
+                print "entered............"
+            except:
+                self.db.rollback()
+                print"rollback........"
 
-            self.send_simple_message(to, subject, message)
-            print "maill sent "
+
+            if commited:
+                # to = ["jaiprakashsingh213@gmail.com", "santosh.kumar@wisepromo.com "]
+                to = self.to
+                subject = "new blog on %s with title %s" %(self.domain_name, post_title_text)
+                message = """Hi
+                            "new blog on %s
+                            whose details are under follow
+                            title ==> %s
+                            link ==> %s"""
+                message = message %(self.domain_name, post_title_text, post_title_link)
+
+                self.send_simple_message(to, subject, message)
+                print "maill sent "
 
 
 

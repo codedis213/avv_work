@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import MySQLdb
 from datetime import datetime
 from req_proxy import main_req
+from req_module import req_main
 
 
 class HealthCaresDiscussion(object):
@@ -190,7 +191,8 @@ class HealthCaresDiscussion(object):
             # r2 = self.req_proxy(link=link)
             # page2 = r2.content
             # r2.close()
-            page2 = main_req(link)
+            #page2 = main_req(link)
+            page2 = req_main(link)
             if page2:
                 self.get_detail_next_page(link, page2)
 
@@ -201,7 +203,8 @@ class HealthCaresDiscussion(object):
         # page = r.content
         # r.close()
         link = "http://www.healthcaresdiscussion.com"
-        page = main_req(link)
+        #page = main_req(link)
+        page = req_main(link)
         if page:
             link_to_extract = self.get_all_link_home_page(page)
             map(self.get_page_next_link, link_to_extract)

@@ -86,9 +86,8 @@ class EmailHandlingAdmin(admin.ModelAdmin):
         to = self.to
         subject = "new email:-  %s added" %(email)
         message = """Hi
-                    "new new email %s
-                    have added to your admin"""
-        message = message %(email)
+                    new email %s have added to your admin"""
+        message = message % email
 
         self.send_simple_message(to, subject, message)
         obj.save()

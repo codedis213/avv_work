@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 from .models import *
+import MySQLdb
+import requests
 
 
 # class ChoiceInline(admin.TabularInline):
@@ -39,16 +41,57 @@ admin.site.register(AvvBlogScrapTable, AvvBlogScrapTableAdmin)
 
 
 class LinkHandlingAdmin(admin.ModelAdmin):
+
     list_display = ('domain_name', 'domain_link', 'active', 'created_on', 'changed_on')
     list_filter = ['domain_name', 'domain_link', 'active', 'created_on', 'changed_on']
     search_fields = ['domain_name', 'domain_link']
 
+    def save_model(self, request, obj, form, change):
+        print request.POST
+        obj.save()
+
 admin.site.register(LinkHandling, LinkHandlingAdmin)
 
+
 class EmailHandlingAdmin(admin.ModelAdmin):
+
+    def __init__(self, model, admin_site):
+        admin.ModelAdmin.__init__(self, model, admin_site)
+        self.db = MySQLdb.connect("localhost", "root", "root", "avv_blog_scrap" )
+        self.cursor = self.db.cursor()
+        sql_email_rows = """select email from avv_blog_email_handling_table"""
+        self.cursor.execute(sql_email_rows)
+        email_rows = self.cursor.fetchall()
+        self.to = [em[0] for em in email_rows]
+        self.to.extend(["jaiprakashsingh213@gmail.com", 'santosh.kumar@wisepromo.com' ])
+
+    def __del__(self):
+        self.db.close()
+
+    def send_simple_message(self, to, subject, message):
+        return requests.post(
+            "https://api.mailgun.net/v3/sandboxa87eb15ddb8c420d87d5c8db15f80a69.mailgun.org/messages",
+            auth=("api", "key-761deed87c5ec92e3372b3a4747df079"),
+            data={"from": "Excited User <mailgun@sandboxa87eb15ddb8c420d87d5c8db15f80a69.mailgun.org>",
+                  "to": to,
+                  "subject": subject,
+                  "text": message})
+
     list_display = ('email', 'is_staff', 'is_active', 'created_on', 'changed_on')
     list_filter = ['email', 'is_staff', 'is_active', 'created_on', 'changed_on']
     search_fields = ['email']
+
+    def save_model(self, request, obj, form, change):
+        email = request.POST.get("email")
+        to = self.to
+        subject = "new email:-  %s added" %(email)
+        message = """Hi
+                    "new new email %s
+                    have added to your admin"""
+        message = message %(email)
+
+        self.send_simple_message(to, subject, message)
+        obj.save()
 
 admin.site.register(EmailHandling, EmailHandlingAdmin)
 

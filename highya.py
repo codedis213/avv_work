@@ -22,12 +22,27 @@ def parse_url(url="http://www.highya.com/"):
                 all_li = post_div.find_all("li")
                 all_a = [li.find("a") for li in all_li]
 
-                f = open("all_a_list", "w+")
                 for a in all_a:
                     link = "http://www.highya.com%s" % a.get("href")
-                    f.write(link + "\n")
-                f.close()
+                    page2 = req_main(url)
 
+                    if page2:
+                        soup2 = BeautifulSoup(page2)
+                        article_tag = soup2.find("article", attrs={"class":"product-article"})
+
+                        if article_div:
+                            header = article_tag.find("header")
+                            domain = "www.highya.com"
+                            main_title = soup2.find("title").text()
+                            main_title_link = link
+                            article_div = article_tag.find("div", attrs={"class":"site-section section-article"})
+                            blog_title = article_div.find("h2").text()
+                            blog_link = link
+                            itemtype = header.get("itemtype").split("/")[-1]
+                            category = itemtype
+                            cat_link = link
+                            entry_content = article_div
+                            entry_text = article_div.text()
 
 if __name__=="__main__":
     parse_url(url="http://www.highya.com/")

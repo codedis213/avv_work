@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import MySQLdb
 from datetime import datetime
 from req_proxy import main_req
+from req_module import req_main
 
 
 class HealthyMiniMarket(object):
@@ -200,23 +201,25 @@ class HealthyMiniMarket(object):
         # r.close()
 
         link_list = ["http://www.healthyminimarket.com",
-                     "http://www.healthyminimarket.com/page/2/",
-                     "http://www.healthyminimarket.com/page/3/",
-                     "http://www.healthyminimarket.com/page/4/",
-                     "http://www.healthyminimarket.com/page/5/",
-                     "http://www.healthyminimarket.com/page/6/",
-                     "http://www.healthyminimarket.com/page/7/",
-                     "http://www.healthyminimarket.com/page/8/",
-                     "http://www.healthyminimarket.com/page/9/",
-                     "http://www.healthyminimarket.com/page/10/",
-                     "http://www.healthyminimarket.com/page/11/",
-                     "http://www.healthyminimarket.com/page/12/",
-                     "http://www.healthyminimarket.com/page/13/",
-                     "http://www.healthyminimarket.com/page/15/",
-                     "http://www.healthyminimarket.com/page/16/"]
+                     # "http://www.healthyminimarket.com/page/2/",
+                     # "http://www.healthyminimarket.com/page/3/",
+                     # "http://www.healthyminimarket.com/page/4/",
+                     # "http://www.healthyminimarket.com/page/5/",
+                     # "http://www.healthyminimarket.com/page/6/",
+                     # "http://www.healthyminimarket.com/page/7/",
+                     # "http://www.healthyminimarket.com/page/8/",
+                     # "http://www.healthyminimarket.com/page/9/",
+                     # "http://www.healthyminimarket.com/page/10/",
+                     # "http://www.healthyminimarket.com/page/11/",
+                     # "http://www.healthyminimarket.com/page/12/",
+                     # "http://www.healthyminimarket.com/page/13/",
+                     # "http://www.healthyminimarket.com/page/15/",
+                     # "http://www.healthyminimarket.com/page/16/"
+                     ]
 
         for link in link_list:
-            page = main_req(link)
+            # page = main_req(link)
+            page = req_main(link)
 
             if page:
                 self.get_link_from_first_page(page)

@@ -28,9 +28,9 @@ class RequestSet(object):
         self. session = Session()
 
     def __del__(self):
-        #del self.base_dir
-        #del self.req_dir
-        #del self.f_name
+        # del self.base_dir
+        # del self.req_dir
+        # del self.f_name
         del self.list_of_proxies
         del self.user
         del self.password

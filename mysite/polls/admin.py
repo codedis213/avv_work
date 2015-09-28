@@ -48,7 +48,7 @@ class LinkHandlingAdmin(admin.ModelAdmin):
 
     def __init__(self, model, admin_site):
         admin.ModelAdmin.__init__(self, model, admin_site)
-        self.db = MySQLdb.connect("localhost", "root", "rootavv", "avv_blog_scrap" )
+        self.db = MySQLdb.connect("localhost", "root", "root", "avv_blog_scrap" )
         self.cursor = self.db.cursor()
         sql_email_rows = """select email from avv_blog_email_handling_table"""
         self.cursor.execute(sql_email_rows)
@@ -94,7 +94,7 @@ class EmailHandlingAdmin(admin.ModelAdmin):
 
     def __init__(self, model, admin_site):
         admin.ModelAdmin.__init__(self, model, admin_site)
-        self.db = MySQLdb.connect("localhost", "root", "rootavv", "avv_blog_scrap" )
+        self.db = MySQLdb.connect("localhost", "root", "root", "avv_blog_scrap" )
         self.cursor = self.db.cursor()
         sql_email_rows = """select email from avv_blog_email_handling_table"""
         self.cursor.execute(sql_email_rows)

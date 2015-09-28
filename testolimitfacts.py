@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import MySQLdb
 from datetime import datetime
 from req_proxy import main_req
+from req_module import req_main
 
 
 class TesToLimitFacts(object):
@@ -155,25 +156,26 @@ class TesToLimitFacts(object):
         # r.close()
 
         link_list = ["http://testolimitfacts.com/",
-                      "http://testolimitfacts.com/testo-limit-review/",
-                        "http://testolimitfacts.com/testo-limit-review/",
-                        "http://testolimitfacts.com/slimgenix-pro/",
-                        "http://testolimitfacts.com/power-pro/",
-                        "http://testolimitfacts.com/addium-brain-enhancer-another-scam/",
-                        "http://testolimitfacts.com/enduros-male-enhancement/",
-                        "http://testolimitfacts.com/testo-xl/",
-                        "http://testolimitfacts.com/is-spartagen-xt-scam/",
-                        "http://testolimitfacts.com/elite-test-360/",
-                        "http://testolimitfacts.com/honest-green-coffee-bean-extract/",
-                        "http://testolimitfacts.com/premium-natural-garcinia-cambogia/",
-                        "http://testolimitfacts.com/maximum-shred/",
-                        "http://testolimitfacts.com/extreme-home-profits-review-worth-the-money-or-a-scam/",
-                        "http://testolimitfacts.com/30-day-change/",
-                        "http://testolimitfacts.com/100-day-loans/",
+                      # "http://testolimitfacts.com/testo-limit-review/",
+                      #   "http://testolimitfacts.com/testo-limit-review/",
+                      #   "http://testolimitfacts.com/slimgenix-pro/",
+                      #   "http://testolimitfacts.com/power-pro/",
+                      #   "http://testolimitfacts.com/addium-brain-enhancer-another-scam/",
+                      #   "http://testolimitfacts.com/enduros-male-enhancement/",
+                      #   "http://testolimitfacts.com/testo-xl/",
+                      #   "http://testolimitfacts.com/is-spartagen-xt-scam/",
+                      #   "http://testolimitfacts.com/elite-test-360/",
+                      #   "http://testolimitfacts.com/honest-green-coffee-bean-extract/",
+                      #   "http://testolimitfacts.com/premium-natural-garcinia-cambogia/",
+                      #   "http://testolimitfacts.com/maximum-shred/",
+                      #   "http://testolimitfacts.com/extreme-home-profits-review-worth-the-money-or-a-scam/",
+                      #   "http://testolimitfacts.com/30-day-change/",
+                      #   "http://testolimitfacts.com/100-day-loans/",
                      ]
 
         for link in link_list:
-            page = main_req(link)
+            # page = main_req(link)
+            page = req_main(link)
 
             if page:
                 self.get_link_from_first_page(link, page)

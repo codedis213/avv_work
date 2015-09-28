@@ -217,19 +217,20 @@ class HealthCaresDiscussion(object):
                       'http://www.healthcaresdiscussion.com/page/3/']
 
         for link in link_lists:
-            r = self.req_proxy(link=link)
-            page = r.content
-            r.close()
+            # r = self.req_proxy(link=link)
+            # page = r.content
+            # r.close()
+            page = req_main(link)
+            if page:
+                link_to_extract = self.get_all_link_home_page(page)
 
-            link_to_extract = self.get_all_link_home_page(page)
-
-            map(self.get_page_next_link, link_to_extract)
+                map(self.get_page_next_link, link_to_extract)
 
 
 
 if __name__ == "__main__":
     obj = HealthCaresDiscussion()
     obj.open_home_page()
-    obj.prev_home_page()
+    # obj.prev_home_page()
 
 

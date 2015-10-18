@@ -15,7 +15,7 @@ class DmozSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        soup = BeautifulSoup(response.body)
+        soup = BeautifulSoup(response.body, "html.parser")
 
         ul_box = soup.find("ul", {"class":"no-list list-related list-articles clearfix"})
         li_list = ul_box.find_all("li")
@@ -27,7 +27,7 @@ class DmozSpider(scrapy.Spider):
     def parse_dir_contents(self, response):
         # try:
             item = DmozItem()
-            soup2 = BeautifulSoup(response.body)
+            soup2 = BeautifulSoup(response.body, "html.parser")
             item["domain_name"] = "highya.com"
             item["domain_link"] = "http://www.highya.com/"
             article_div = soup2.find("article", {"class":"product-article"})
@@ -41,9 +41,10 @@ class DmozSpider(scrapy.Spider):
             item["category_link"] = category_a.get("href")
             item["sub_category_title"] = ''
             item["sub_category_link"] = ''
-            # item["entry_content_html"] = soup2.find("div", {"class":"site-section section-article"})
-            item["entry_content_text"] = soup2.find("div", {"class":"site-section section-article"}).get_text()
-            # item["created_on"] = datetime.datetime.now()
+            section_article = soup2.find("div", {"class":"site-section section-article"})
+            item["entry_content_html"] = str(section_article.encode("ascii", "ignore"))
+            item["entry_content_text"] = section_article.get_text()
+            item["created_on"] = datetime.datetime.now()
 
             yield  item
         # except:

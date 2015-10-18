@@ -21,13 +21,9 @@ class DmozSpider(scrapy.Spider):
 
         for li in li_list:
             url = li.find("a", {"class":"a-st2"}).get("href")
-            print url
             yield scrapy.Request(url, callback=self.parse_dir_contents)
 
-
-
     def parse_dir_contents(self, response):
-
         item = DmozItem()
         soup2 = BeautifulSoup(response.body)
         item["domain_name"] = "highya.com"

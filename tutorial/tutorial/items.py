@@ -9,6 +9,16 @@ import scrapy
 
 
 class DmozItem(scrapy.Item):
-    title = scrapy.Field()
-    link = scrapy.Field()
-    des = scrapy.Field()
+    domain_name = scrapy.Field()
+    domain_link = scrapy.Field()
+    main_title = scrapy.Field()
+    main_title_link = scrapy.Field()
+    blog_title = scrapy.Field()
+    blog_link = scrapy.Field()
+    category_title = scrapy.Field()
+    # category_link = scrapy.Field()
+    # sub_category_title = scrapy.Field()
+    # sub_category_link = scrapy.Field()
+    # entry_content_html = scrapy.Field()
+    # entry_content_text = scrapy.Field()
+    # created_on = scrapy.Field()

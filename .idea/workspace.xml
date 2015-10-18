@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fc6be871-01ef-4156-bfe9-a43377a38b4d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tutorial/tutorial/spiders/dmoz_spider.py" afterPath="$PROJECT_DIR$/tutorial/tutorial/spiders/dmoz_spider.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tutorial/tutorial/items.py" afterPath="$PROJECT_DIR$/tutorial/tutorial/items.py" />
     </list>
     <ignored path="avv_work.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,17 +38,27 @@
         <entry file="file://$PROJECT_DIR$/tutorial/tutorial/items.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+              <caret line="23" column="14" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dmoz_spider.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dmoz_spider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tutorial/tutorial/spiders/dmoz_spider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47029704">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="items.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tutorial/tutorial/items.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9460432">
+              <caret line="3" column="1096" selection-start-line="3" selection-start-column="1096" selection-end-line="3" selection-end-column="1096" />
               <folding />
             </state>
           </provider>
@@ -99,6 +110,7 @@
         <option value="$PROJECT_DIR$/tutorial/tutorial/pipelines.py" />
         <option value="$PROJECT_DIR$/tutorial/tutorial/settings.py" />
         <option value="$PROJECT_DIR$/tutorial/tutorial/items.py" />
+        <option value="$PROJECT_DIR$/tutorial/tutorial/items.json" />
         <option value="$PROJECT_DIR$/tutorial/tutorial/spiders/dmoz_spider.py" />
       </list>
     </option>
@@ -409,13 +421,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proxies_808.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -799,18 +804,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tutorial/tutorial/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tutorial/tutorial/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <caret line="23" column="14" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tutorial/tutorial/spiders/dmoz_spider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47029704">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tutorial/tutorial/items.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9460432">
+          <caret line="3" column="1096" selection-start-line="3" selection-start-column="1096" selection-end-line="3" selection-end-column="1096" />
           <folding />
         </state>
       </provider>

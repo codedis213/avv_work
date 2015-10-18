@@ -25,7 +25,7 @@ class DmozSpider(scrapy.Spider):
             yield scrapy.Request(url, callback=self.parse_dir_contents)
 
     def parse_dir_contents(self, response):
-        # try:
+        try:
             item = DmozItem()
             soup2 = BeautifulSoup(response.body, "html.parser")
             item["domain_name"] = "highya.com"
@@ -42,13 +42,13 @@ class DmozSpider(scrapy.Spider):
             item["sub_category_title"] = ''
             item["sub_category_link"] = ''
             section_article = soup2.find("div", {"class":"site-section section-article"})
-            item["entry_content_html"] = str(section_article.encode("ascii", "ignore"))
+            item["entry_content_html"] = str(section_article)
             item["entry_content_text"] = section_article.get_text()
-            item["created_on"] = datetime.datetime.now()
+            item["created_on"] = str(datetime.datetime.now())
 
             yield  item
-        # except:
-        #     pass
+        except:
+            pass
 
 
 

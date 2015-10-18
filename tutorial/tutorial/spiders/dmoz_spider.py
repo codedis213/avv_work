@@ -46,7 +46,7 @@ class DmozSpider(scrapy.Spider):
             item["entry_content_text"] = section_article.get_text()
             item["created_on"] = str(datetime.datetime.now())
 
-            yield  item
+            return  item
         except:
             pass
 

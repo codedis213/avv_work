@@ -56,25 +56,27 @@ class AmazoncrawlerPipeline(object):
         self.cursor.execute('SET character_set_connection=utf8;')
 
     def process_item(self, item, spider):
-        try:
-            sql = """INSERT INTO avv_blog_scrap_table
-                (domain_name, domain_link, main_title, main_title_link,
-                blog_title, blog_link, category_title, category_link,
-                sub_category_title, sub_category_link,
-                entry_content_html, entry_content_text, created_on)
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
+        # try:
+        sql = """INSERT INTO avv_blog_scrap_table
+            (domain_name, domain_link, main_title, main_title_link,
+            blog_title, blog_link, category_title, category_link,
+            sub_category_title, sub_category_link,
+            entry_content_html, entry_content_text, created_on)
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"""
 
 
-            self.cursor.execute(sql, (item['domain_name'], item['domain_link'], item['main_title'],
-                                      item['main_title_link'], item['blog_title'], item['blog_link'],
-                                      item['category_title'], item['category_link'], item['sub_category_title'],
-                                      item['sub_category_link'], item['entry_content_html'], item['entry_content_text'],
-                                      item['created_on']))
+        sql_stmnt = sql % (item['domain_name'], item['domain_link'], item['main_title'],
+                                  item['main_title_link'], item['blog_title'], item['blog_link'],
+                                  item['category_title'], item['category_link'], item['sub_category_title'],
+                                  item['sub_category_link'], item['entry_content_html'], item['entry_content_text'],
+                                  item['created_on'])
 
-            self.connection.commit()
+        self.cursor.execute(sql_stmnt)
 
-        except MySQLdb.Error, e:
-            print 'Error %d: %s' % (e.args[0], e.args[1])
+        self.connection.commit()
+
+        # except MySQLdb.Error, e:
+        #     print 'Error %d: %s' % (e.args[0], e.args[1])
 
         return item
 

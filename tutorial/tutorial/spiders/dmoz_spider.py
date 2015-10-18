@@ -44,7 +44,7 @@ class DmozSpider(scrapy.Spider):
             section_article = soup2.find("div", {"class":"site-section section-article"})
             item["entry_content_html"] = str(section_article)
             item["entry_content_text"] = section_article.get_text()
-            item["created_on"] = str(datetime.datetime.now())
+            item["created_on"] = datetime.datetime.now()
 
             return  item
         except:

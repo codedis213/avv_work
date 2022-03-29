@@ -45,7 +45,7 @@ mongoengine==0.10.0
 oauth==1.0.1
 oauthlib==0.6.1
 oneconf==0.3.7
-paramiko==1.10.1
+paramiko==2.10.1
 pexpect==3.1
 pika==0.9.14
 piston-mini-client==0.7.5

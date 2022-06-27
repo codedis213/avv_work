@@ -63,7 +63,7 @@ python-cloudfiles==1.7.10
 python-debian==0.1.21-nmu2ubuntu2
 pytz==2015.4
 pyxdg==0.25
-reportlab==3.0
+reportlab==3.5.55
 requests==2.2.1
 sessioninstaller==0.0.0
 simplejson==3.3.1

@@ -3,7 +3,7 @@ Django==1.8.3
 Markdown==2.4
 MySQL-python==1.2.5
 PAM==0.4.2
-Pillow==2.3.0
+Pillow==9.3.0
 PyYAML==3.10
 Pygments==1.6
 SecretStorage==2.0.0
